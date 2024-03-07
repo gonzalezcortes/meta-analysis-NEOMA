@@ -1,3 +1,3 @@
 # Meta Analysis NEOMA
 
-Repository for the Workshop at NEOMA, March 2024.
+Repository for meta analysis at NEOMA, March 2024.
