@@ -4,15 +4,37 @@
 #call psychmeta library
 library(psychmeta)
 
-# Example dataset
-df <- data.frame(
-  study = c("Study 1", "Study 2", "Study 3"),
-  effect_size = c(0.2, 0.3, 0.25),
-  sample_size = c(100, 150, 120)
-)
+#get wd automaticly 
+setwd(getwd())
 
-# Conducting the meta-analysis
-meta_analysis_result <- ma_r(r = df$effect_size, n = df$sample_size, data = df)
+#Open data in folder data
+#Dummy data
+data <- read.csv("data/data_code.csv", sep = ";")
 
-# Viewing the results
-print(meta_analysis_result)
+meta<-ma_r(data = data,
+           ma_method = "ic",
+           rxyi = "r",
+           n = "N",
+           construct_x = "x_name",
+           construct_y = "y_name",
+           rxx = "rxxi",
+           ryy = "ryyi",
+           clean_artifacts = TRUE,
+           impute_artifacts = TRUE) 
+summary(meta)
+
+moderator <- "SampleType"
+meta.Mod<-ma_r(data = data,
+               ma_method = "ic",
+               rxyi = "r",
+               n = "N",
+               construct_x = "x_name",
+               construct_y = "y_name",
+               rxx = "rxxi",
+               ryy = "ryyi",
+               clean_artifacts = TRUE,
+               impute_artifacts = TRUE,
+               moderators = moderator,
+               cat_moderators = c(TRUE),
+               moderator_type = "simple")
+summary(meta.Mod)
